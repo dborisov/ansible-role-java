@@ -1,0 +1,4 @@
+---
+java_version: "1.8.0" # 1.8.0 | 11 | 17
+java_type: headless # headless | devel
+java_package: "java-{{ java_version }}-openjdk-{{ java_type }}"

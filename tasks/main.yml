@@ -1,0 +1,5 @@
+---
+- name: "Ensure {{ java_package }} package is installed"
+  yum:
+    name: "{{ java_package }}"
+    state: present
