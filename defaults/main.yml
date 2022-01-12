@@ -1,0 +1,4 @@
+---
+java_version: "11"
+java_install_jdk: no
+java_package: "java-{{ java_version }}-openjdk-{% if java_install_jdk %}devel{% else %}headless{% endif %}"

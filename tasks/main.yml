@@ -1,0 +1,19 @@
+---
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+  when: ansible_distribution != 'Rocky'
+
+  # Ansible < 2.11 bug - https://github.com/ansible/ansible/issues/74244
+- name: Include variables for RockyLinux.
+  include_vars: "RedHat-{{ ansible_distribution_major_version }}.yml"
+  when: ansible_distribution == 'Rocky'
+
+- name: Ensure the Java version is correct for the OS version.
+  fail:
+    msg: No {{ java_package }} package available for {{ ansible_distribution }} {{ ansible_distribution_major_version }}
+  when: java_version not in _java_versions
+
+- name: "Ensure {{ java_package }} package is installed"
+  yum:
+    name: "{{ java_package }}"
+    state: present
