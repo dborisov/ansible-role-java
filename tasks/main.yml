@@ -1,24 +1,17 @@
 ---
-- name: Ensure java_type var has acceptable value
-  assert:
-    that: java_type in [ "headless", "devel" ]
-    quiet: yes
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+  when: ansible_distribution != 'Rocky'
 
-- name: Ensure java_version var has acceptable value for EL7
-  assert:
-    that:
-      - java_version in ['1.8.0', '11']
-  when:
-    - ansible_os_family == 'RedHat'
-    - ansible_distribution_major_version | int < 8
+  # https://github.com/ansible/ansible/issues/74244
+- name: Include variables for RockyLinux.
+  include_vars: "RedHat-{{ ansible_distribution_major_version }}.yml"
+  when: ansible_distribution == 'Rocky'
 
-- name: Ensure java_version var has acceptable value for EL8
-  assert:
-    that:
-      - java_version in ['1.8.0', '11', '17']
-  when:
-    - ansible_os_family == 'RedHat'
-    - ansible_distribution_major_version | int >= 8
+- name: Ensure the Java version is correct for the OS version.
+  fail:
+    msg: No {{ java_package }} package available for {{ ansible_distribution }} {{ ansible_distribution_major_version }}
+  when: java_version not in _java_versions
 
 - name: "Ensure {{ java_package }} package is installed"
   yum:
