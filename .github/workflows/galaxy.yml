@@ -19,4 +19,6 @@ jobs:
         run: pip3 install ansible
 
       - name: Import role to the Ansible Galaxy
-        run: ansible-galaxy role import --api-key ${{ secrets.GALAXY_API_KEY }} $(echo ${{ github.repository }} | tr '/' ' ')
+        run: |
+          echo "ansible-galaxy role import --api-key ${{ secrets.GALAXY_API_KEY }} $(echo ${{ github.repository }} | tr '/' ' ')"
+          ansible-galaxy role import --api-key ${{ secrets.GALAXY_API_KEY }} $(echo ${{ github.repository }} | tr '/' ' ')
