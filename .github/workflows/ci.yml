@@ -6,14 +6,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.6, 3.8, 3.9]
+        python-version: [3.6, 3.8, 3.10]
         config:
           - image: "centos"
             tag: "7"
           - image: "rockylinux"
             tag: "8"
+          - image: "rockylinux"
+            tag: "9"
           - image: "almalinux"
             tag: "8"
+          - image: "almalinux"
+            tag: "9"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
