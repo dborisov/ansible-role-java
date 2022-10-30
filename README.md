@@ -11,7 +11,7 @@ Acceptable Java versions for RHEL7-based OS:
 - 1.8.0
 - 11
 
-Acceptable Java versions for RHEL8-based OS:
+Acceptable Java versions for RHEL8-based and RHEL9-based OS:
 - 1.8.0
 - 11
 - 17
