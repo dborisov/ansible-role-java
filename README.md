@@ -1,50 +1,32 @@
 # ansible-role-java
-Ansible role to install Java
+Ansible role to install java
 
-## Role Variables
+# Supported Platforms
+- RedHat 8
+- RedHat 9
 
-### java_version (optional)
+# Requirements
+- The role supports the installation of java versions `8`, `11` and `17`. Default is `11`.
 
-Acceptable Java versions for RHEL7-based OS:
-- 1.6.0
-- 1.7.0
-- 1.8.0
-- 11
-
-Acceptable Java versions for RHEL8-based and RHEL9-based OS:
-- 1.8.0
-- 11
-- 17
-
+# Example Variables
 ```
-java_version: 11 # default
-```
-### java_install_jdk (optional)
-
-Install JDK or JRE only
-
-```
-java_install_jdk: no # default
+java_version: "17"
+java_type: jdk
 ```
 
-### java_package (optional)
-
-You can pin the exact Java package version by setting this variable
-
-```
-java_package: java-17-openjdk-17.0.0.0.26
-```
-
-## Example playbook
-
-Install JDK 1.8.0 (java-1.8.0-openjdk-devel package)
-
+# Example Playbook
 ```
 ---
-- name: Install Java
-  hosts: all
+- hosts: java
   roles:
-    - role: ansible-role-java
-      java_version: "1.8.0"
-      java_install_jdk: yes
+    - role: dborisov.java
 ```
+
+# Role Variables
+Please see `defaults/main.yml`
+
+# Dependencies
+None
+
+# License
+MIT
