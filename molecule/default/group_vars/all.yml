@@ -1,0 +1,3 @@
+---
+java_version: "{{ lookup('env', 'JAVA_VERSION') }}"
+java_type: jdk

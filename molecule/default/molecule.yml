@@ -4,11 +4,24 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: "${IMAGE:-rockylinux}-${TAG:-8}-java"
-    image: "${IMAGE:-rockylinux}:${TAG:-8}"
+  - name: "${IMAGE:-rockylinux}-${TAG:-9}-java-${JAVA_VERSION:-11}"
+    hostname: java
+    # Systemd is absent in rockylinux 9.1 docker image.
+    # https://github.com/rocky-linux/sig-cloud-instance-images/issues/39
+    image: "${NAMESPACE:-library}/${IMAGE:-rockylinux}:${TAG:-9.0}"
     pre_build_image: true
+    privileged: true
+    cgroupns_mode: host
+    command: /sbin/init
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
 provisioner:
   name: ansible
+  env:
+    JAVA_VERSION: ${JAVA_VERSION:-11}
 verifier:
   name: ansible
 lint: |

@@ -2,26 +2,37 @@ on: push
 
 jobs:
   molecule:
-    runs-on: ubuntu-20.04 # https://github.com/actions/setup-python/issues/544
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.6', '3.8', '3.10']
+        python-version: ['3.9']
+        java-version: ['8', '11', '17']
         config:
-          - image: "rockylinux"
+          - namespace: "library"
+            image: "rockylinux"
             tag: "8"
-          - image: "rockylinux"
-            tag: "9"
-          - image: "almalinux"
+          - namespace: "library"
+            image: "rockylinux"
+            tag: "9.0" # https://github.com/rocky-linux/sig-cloud-instance-images/issues/39
+          - namespace: "library"
+            image: "almalinux"
             tag: "8"
-          - image: "almalinux"
+          - namespace: "library"
+            image: "almalinux"
             tag: "9"
+          - namespace: "redhat"
+            image: "ubi8"
+            tag: "latest"
+          - namespace: "redhat"
+            image: "ubi9"
+            tag: "latest"
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -34,5 +45,7 @@ jobs:
         run: tox
         env:
           ANSIBLE_FORCE_COLOR: '1'
+          NAMESPACE: ${{ matrix.config.namespace }}
           IMAGE: ${{ matrix.config.image }}
           TAG: ${{ matrix.config.tag }}
+          JAVA_VERSION: ${{ matrix.java-version }}

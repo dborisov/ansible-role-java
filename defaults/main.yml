@@ -1,4 +1,14 @@
 ---
 java_version: "11"
-java_install_jdk: no
-java_package: "java-{{ java_version }}-openjdk-{% if java_install_jdk %}devel{% else %}headless{% endif %}"
+java_type: "jre-headless"
+java_package: "{{ _java_packages[java_type | lower] }}"
+
+_java_versions:
+  "8": "1.8.0"
+  "11": "11"
+  "17": "17"
+
+_java_packages:
+  "jre-headless": "java-{{ _java_versions[java_version] }}-openjdk-headless"
+  "jre": "java-{{ _java_versions[java_version] }}-openjdk"
+  "jdk": "java-{{ _java_versions[java_version] }}-openjdk-devel"
