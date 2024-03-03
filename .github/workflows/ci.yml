@@ -7,14 +7,14 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ['3.9']
-        java-version: ['8', '11', '17']
+        java-version: ['8', '11', '17', '21']
         config:
-          - namespace: "library"
+          - namespace: "rockylinux"
             image: "rockylinux"
-            tag: "8"
-          - namespace: "library"
+            tag: "8-ubi-init"
+          - namespace: "rockylinux"
             image: "rockylinux"
-            tag: "9.0" # https://github.com/rocky-linux/sig-cloud-instance-images/issues/39
+            tag: "9-ubi-init"
           - namespace: "library"
             image: "almalinux"
             tag: "8"

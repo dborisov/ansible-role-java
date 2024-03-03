@@ -4,11 +4,9 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: "${IMAGE:-rockylinux}-${TAG:-9}-java-${JAVA_VERSION:-11}"
+  - name: "${IMAGE:-rockylinux}-${TAG:-9-ubi-init}-java-${JAVA_VERSION:-11}"
     hostname: java
-    # Systemd is absent in rockylinux 9.1 docker image.
-    # https://github.com/rocky-linux/sig-cloud-instance-images/issues/39
-    image: "${NAMESPACE:-library}/${IMAGE:-rockylinux}:${TAG:-9.0}"
+    image: "${NAMESPACE:-rockylinux}/${IMAGE:-rockylinux}:${TAG:-9-ubi-init}"
     pre_build_image: true
     privileged: true
     cgroupns_mode: host
