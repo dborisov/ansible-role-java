@@ -1,3 +1,9 @@
+## [2.0.1] - 2024-03-03
+
+### Changed
+
+- Provide support for new java versions without modifying the role code ([#7](https://github.com/dborisov/ansible-role-java/issues/7)).
+
 ## [2.0.0] - 2023-03-28
 
 ### Changed
@@ -21,3 +27,4 @@ Initial release.
 [1.0.0]: https://github.com/dborisov/ansible-role-java/releases/tag/1.0.0
 [1.0.1]: https://github.com/dborisov/ansible-role-java/releases/tag/1.0.1
 [2.0.0]: https://github.com/dborisov/ansible-role-java/releases/tag/2.0.0
+[2.0.1]: https://github.com/dborisov/ansible-role-java/releases/tag/2.0.1

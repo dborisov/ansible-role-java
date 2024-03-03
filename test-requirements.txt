@@ -1,2 +1,4 @@
-molecule[docker,lint] >= 4.0.0
+molecule[docker,lint] >= 4.0.0, < 5
 ansible-lint >= 6.0.0
+ansible-compat <= 4.0.0 # https://github.com/ansible/molecule/issues/3903
+urllib3 < 2 # https://github.com/docker/docker-py/issues/3113

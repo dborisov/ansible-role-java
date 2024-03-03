@@ -6,12 +6,22 @@ Ansible role to install java
 - RedHat 9
 
 # Requirements
-- The role supports the installation of java versions `8`, `11` and `17`. Default is `11`.
+- The role supports installation of any java version available on the platform. Headless JRE 11 will be installed by default.
 
 # Example Variables
+
+## Install JDK 21
+
 ```
-java_version: "17"
+java_version: "21"
 java_type: jdk
+```
+
+## Install full JRE 8
+
+```
+java_version: "8"
+java_type: jre
 ```
 
 # Example Playbook
